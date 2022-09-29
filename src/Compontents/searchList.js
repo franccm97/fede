@@ -1,6 +1,7 @@
 import Item from './Item'
 import { useContext } from 'react';
 import { ProductContext } from '../Context/ProductContext'
+import "./search.css"
 
 
 
@@ -12,7 +13,7 @@ const SearchList = ({ filteredProducts }) => {
     const filtered = filteredProducts.map((product) => {
         return (
             <>
-                <div onClick={() => selectProduct(product)}>
+                <div onClick={() => selectProduct(product)}  className="productDisplay">
                     <Item
                         imgUrl={product.imgUrl}
                         brand={product.brand}

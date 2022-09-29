@@ -1,4 +1,10 @@
 .input{
+    background-color: red;
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.productDisplay{
+    display: flex;
 }

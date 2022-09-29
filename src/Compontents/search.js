@@ -1,4 +1,5 @@
-import { useState, useEffect,useContext} from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ProductContext } from '../Context/ProductContext'
 import SearchList from './searchList'
 import "./search.css"
@@ -7,7 +8,7 @@ import "./search.css"
 const Search = ({ products }) => {
 
     const { addFavourites } = useContext(ProductContext)
-
+    const navigate = useNavigate()
     const [searching, setSearching] = useState("")
 
     useEffect(() => {
@@ -28,7 +29,10 @@ const Search = ({ products }) => {
             <div className='input'>
                 <input type={"search"} value={searching} placeholder={"Busca aquí"} onChange={handleSearch} />
             </div>
-            <div onClick={()=> addFavourites( )}>
+            <div onClick={() => {
+                addFavourites()
+                navigate("details")
+            }} className="productDisplay">
                 <SearchList filteredProducts={filteredProducts} />
             </div>
         </>
