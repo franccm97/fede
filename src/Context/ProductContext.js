@@ -14,7 +14,7 @@ const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     const [favouriteProducts, setFavouriteProducts] = useState([])
     const [selectedProduct, setSelectedProduct] = useState({})
-    const [cart, setCart] = useState()
+    const [cart, setCart] = useState([])
     const [newProduct, setNewProduct] = useState({
         id: "",
         colorCode: "",
@@ -28,6 +28,13 @@ const ProductsProvider = ({ children }) => {
 
     function selectProduct(e) {
         setSelectedProduct(e)
+    }
+
+    function addCart(product) {
+        let newArr = [...cart]
+        newArr.push(product)
+        setCart(newArr)
+        console.log(cart);
     }
 
     useEffect(() => {
@@ -57,7 +64,7 @@ const ProductsProvider = ({ children }) => {
     }
 
     return (
-        <ProductContext.Provider value={{ products, favouriteProducts, selectedProduct, newProduct, setNewProduct, addFavourites, selectProduct }}>
+        <ProductContext.Provider value={{ products, favouriteProducts, selectedProduct, newProduct, setNewProduct, addFavourites, selectProduct, addCart }}>
             {children}
         </ProductContext.Provider>
     )

@@ -5,7 +5,7 @@ import "./actions.css"
 const Actions = ({ colors, sims, id }) => {
 
 
-    const { newProduct, setNewProduct } = useContext(ProductContext)
+    const { newProduct, setNewProduct, addCart } = useContext(ProductContext)
 
 
     const [colorCode, setColorCode] = useState("")
@@ -32,17 +32,17 @@ const Actions = ({ colors, sims, id }) => {
         }
         )
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newProduct)
-        };
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(newProduct)
+        // };
 
-        setTimeout(() => {
-            fetch('https://front-test-api.herokuapp.com/api/cart', requestOptions)
-                .then(response => response.json())
-                .then(data => console.log(data));
-        }, 1000);
+        // setTimeout(() => {
+        //     fetch('https://front-test-api.herokuapp.com/api/cart', requestOptions)
+        //         .then(response => response.json())
+        //         .then(data => console.log(data));
+        // }, 1000);
 
     }
 
@@ -94,7 +94,7 @@ const Actions = ({ colors, sims, id }) => {
                         })
                     }
                 </div>
-                <div className='button' onClick={() => handleActions()}>
+                <div className='button' onClick={() => addCart(newProduct)}>
                     <button>Añadir a la cesta</button>
                 </div>
             </div>
