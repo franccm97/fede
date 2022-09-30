@@ -1,19 +1,24 @@
 import Item from './Item'
 import { useContext } from 'react';
 import { ProductContext } from '../Context/ProductContext'
+import { useNavigate } from "react-router-dom";
 import "./search.css"
 
 
 
 const SearchList = ({ filteredProducts }) => {
 
-    const { addFavourites, selectProduct } = useContext(ProductContext)
-
-
+    const { selectProduct } = useContext(ProductContext)
+    const naviagate = useNavigate()
     const filtered = filteredProducts.map((product) => {
         return (
             <>
-                <div onClick={() => selectProduct(product)}  className="productDisplay">
+                <div onClick={() => {
+                    selectProduct(product)
+                    setTimeout(() => {
+                        naviagate("/details")
+                    }, 700);
+                }} >
                     <Item
                         imgUrl={product.imgUrl}
                         brand={product.brand}
@@ -29,7 +34,7 @@ const SearchList = ({ filteredProducts }) => {
 
 
     return (
-        <div>
+        <div className="displayList">
             {filtered}
         </div>
     )

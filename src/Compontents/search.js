@@ -29,12 +29,8 @@ const Search = ({ products }) => {
             <div className='input'>
                 <input type={"search"} value={searching} placeholder={"Busca aquí"} onChange={handleSearch} />
             </div>
-            <div onClick={() => {
-                addFavourites()
-                navigate("details")
-            }} className="productDisplay">
-                <SearchList filteredProducts={filteredProducts} />
-            </div>
+            <SearchList filteredProducts={filteredProducts} />
+
         </>
 
     )

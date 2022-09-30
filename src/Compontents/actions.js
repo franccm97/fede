@@ -6,7 +6,8 @@ const Actions = ({ colors, sims, id }) => {
 
 
     const { newProduct, setNewProduct, addCart } = useContext(ProductContext)
-
+    // console.log(sims, "sims");
+    // console.log(colors, "colors");
 
     const [colorCode, setColorCode] = useState("")
     const [storageCode, setStorageCode] = useState("")
@@ -25,24 +26,38 @@ const Actions = ({ colors, sims, id }) => {
 
         setNewProduct({
 
-            ...newProduct, id: id,
+            ...newProduct,
+            id: id,
             colorCode: colorCode,
             storageCode: storageCode
 
-        }
-        )
 
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(newProduct)
-        // };
+        })
+        setTimeout(() => {
+        addCart(newProduct)
+    
 
-        // setTimeout(() => {
-        //     fetch('https://front-test-api.herokuapp.com/api/cart', requestOptions)
-        //         .then(response => response.json())
-        //         .then(data => console.log(data));
-        // }, 1000);
+
+        
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newProduct)
+                
+            };
+
+            console.log(requestOptions.body);
+            fetch('https://front-test-api.herokuapp.com/api/cart', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)                   
+                });
+        }, 1000);
+
+
+
+
+
 
     }
 
@@ -52,12 +67,14 @@ const Actions = ({ colors, sims, id }) => {
 
     useEffect(() => {
 
-
-    }, [colorCode, storageCode])
+    }, [])
 
 
     return (
+
+
         <>
+
             <h2>Acciones del producto</h2>
             <div>
                 <h3>Color</h3>
@@ -77,24 +94,25 @@ const Actions = ({ colors, sims, id }) => {
                         })
                     }
                 </div>
-                <h3>Almacenamiento</h3>
-                <div>
-                    {
-                        sims && sims.map((sim, index) => {
-                            console.log(sim, "sim");
-                            return (
-                                <>
-                                    <div className='colors__colorContainer' onClick={() => handleStorage(sim)}>
-                                        <h5>
-                                            `{sim}`
-                                        </h5>
-                                    </div>
-                                </>
-                            )
-                        })
-                    }
+                <h3>
+                    Almacenamiento
+                </h3>
+
+                <div className='sim'>
+                    {sims && sims.map((sim, index) => {
+                        return (
+                            <>
+                                <div className='colors__colorContainer' onClick={()=>handleStorage(sim,index)}>
+                                    <h5>
+                                        {sim}
+                                    </h5>
+                                </div>
+                            </>
+                        )
+                    })}
                 </div>
-                <div className='button' onClick={() => addCart(newProduct)}>
+
+                <div className='button' onClick={() => handleActions()}>
                     <button>Añadir a la cesta</button>
                 </div>
             </div>

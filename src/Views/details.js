@@ -18,9 +18,13 @@ const Details = () => {
       fetch(`${root}${selectedProduct.id}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data,"to fetch");
-          console.log(dataSelectedProdcut, "dataselected");
-          setDataSelectedProdcut(data)
+          setTimeout(() => {
+            console.log(dataSelectedProdcut, "dataselected");
+            setDataSelectedProdcut(data)
+            console.log(dataSelectedProdcut, "dataselected");
+            localStorage.setItem('selectedProdcut', JSON.stringify(data))
+          }, 500);
+        console.log(selectedProduct,"selectedProdcut");
         })
     }
 
@@ -30,43 +34,42 @@ const Details = () => {
     <>
       <Header />
       {
-        dataSelectedProdcut &&
-        <div className='detailsPage'>
-          <div className='detailPage__image'>
-            <img src={selectedProduct.imgUrl} />
-          </div>
-          <div className="detailPage__text">
-            <div className='detailPage__text__description'>
-              <h2>Descripción del producto</h2>
-              <ul>
-             
-                <li>
-                  {dataSelectedProdcut.brand}
-                </li>
-                <li>
-                  {dataSelectedProdcut.model}
-                </li>
-                <li>
-                  {dataSelectedProdcut.price}
-                </li>
-                <li>
-                  {dataSelectedProdcut.cpu}
-                </li>
-                <li>
-                  {dataSelectedProdcut.ram}
-                </li>
-                <li>
-                  {dataSelectedProdcut.os}
-                </li>
-                <li>
-                  {dataSelectedProdcut.displayResolution}
-                </li>
-                <li>
-                  {dataSelectedProdcut.battery}
-                </li>
-                {/* <li>
+          <div className='detailsPage'>
+            <div className='detailPage__image'>
+              <img src={selectedProduct.imgUrl} />
+            </div>
+            <div className="detailPage__text">
+              <div className='detailPage__text__description'>
+                <h2>Descripción del producto</h2>
+                <ul>
 
-                {dataSelectedProdcut && dataSelectedProdcut.primaryCamera.map((e) => {
+                  <li>
+                    {dataSelectedProdcut.brand}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.model}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.price}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.cpu}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.ram}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.os}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.displayResolution}
+                  </li>
+                  <li>
+                    {dataSelectedProdcut.battery}
+                  </li>
+                  <li>
+
+                    {/* {dataSelectedProdcut ? dataSelectedProdcut.primaryCamera.map((e) => {
                   console.log(e, "primary");
                   return (
                     <>
@@ -74,22 +77,26 @@ const Details = () => {
 
                     </>
                   )
-                })}
-              </li> */}
-                {
+                }) : ""} */}
+                  </li>
+                  {
+                    <li>
+                      {dataSelectedProdcut.dimentions}
+                    </li>}
                   <li>
-                    {dataSelectedProdcut.dimentions}
-                  </li>}
-                <li>
-                  {dataSelectedProdcut.weight} gr
-                </li>
-              </ul>
-            </div>
-            <div className='detailPage__text__actions'>
-              <Actions colors={dataSelectedProdcut.colors} sims={dataSelectedProdcut.sim} id={dataSelectedProdcut.id} />
+                    {dataSelectedProdcut.weight} gr
+                  </li>
+                </ul>
+              </div>
+              <div className='detailPage__text__actions'>
+                {
+                  selectedProduct ?
+                    <Actions colors={dataSelectedProdcut.colors} sims={dataSelectedProdcut.sim} id={dataSelectedProdcut.id} />
+                    : ""
+                }
+              </div>
             </div>
           </div>
-        </div>
       }
 
     </>

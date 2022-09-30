@@ -1,13 +1,19 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { ProductContext } from '../Context/ProductContext'
 import { Link } from "react-router-dom"
 import "./header.css"
+import { createAdd } from 'typescript'
 
 
 
 const Header = () => {
 
-    const { favouriteProducts } = useContext(ProductContext)
+    const { cart } = useContext(ProductContext)
+
+
+    useEffect(() => {
+
+    }, [cart])
 
     const routes =
         [{
@@ -44,7 +50,8 @@ const Header = () => {
             </div>
 
             <div className='headerContainer__cart'>
-                {favouriteProducts.length}
+                {cart && cart.length > 1 ? cart.length - 1 : "0"}
+
             </div>
 
         </div>
